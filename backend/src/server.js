@@ -85,9 +85,6 @@ async function startServer() {
     app.use("/api/reviews", reviewRoutes);
 
     // Health check route
-    app.get("/", (req, res) => {
-      res.send("📚 Book Review API is running...");
-    });
     app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
     });
