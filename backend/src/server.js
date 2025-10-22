@@ -88,6 +88,9 @@ async function startServer() {
     app.get("/", (req, res) => {
       res.send("📚 Book Review API is running...");
     });
+    app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+    });
 
     // Start the server
     const PORT = process.env.PORT || 5000;
