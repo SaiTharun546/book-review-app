@@ -1,17 +1,21 @@
 import axios from "axios";
 
-// Ensure API_URL does NOT contain `/api`
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+// If NEXT_PUBLIC_API_URL was provided at build time, use it.
+// Otherwise, in the browser, fall back to same host with port 3001.
+const runtimeFallback = (typeof window !== "undefined")
+  ? `${window.location.protocol}//${window.location.hostname}:3001`
+  : "http://localhost:3001";
 
-// General function to handle errors
-const handleApiError = (error, defaultMessage) => {
-  return error.response?.data?.message || defaultMessage;
-};
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || runtimeFallback;
 
-// Export a configured axios instance using the base URL
+// Optional: log to confirm what URL is being used (remove in prod)
+if (typeof window !== "undefined") {
+  console.log("Using API base URL:", API_URL);
+}
+
+// Export axios instance
 export const api = axios.create({
   baseURL: API_URL,
-  // optional axios defaults:
   // timeout: 5000,
   // withCredentials: true,
 });
