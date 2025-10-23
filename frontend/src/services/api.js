@@ -1,12 +1,20 @@
 import axios from "axios";
 
 // Ensure API_URL does NOT contain `/api`
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
 // General function to handle errors
 const handleApiError = (error, defaultMessage) => {
   return error.response?.data?.message || defaultMessage;
 };
+
+// Export a configured axios instance using the base URL
+export const api = axios.create({
+  baseURL: API_URL,
+  // optional axios defaults:
+  // timeout: 5000,
+  // withCredentials: true,
+});
 
 // ---------------------- User Authentication ----------------------
 
