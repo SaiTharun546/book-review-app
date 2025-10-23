@@ -6,7 +6,7 @@ COPY backend/package*.json ./
 # Install all deps (dev + prod) needed for build
 RUN npm ci
 # Copy source
-COPY backend/ ./
+COPY . .
 # If your backend has a build step (TypeScript/transpile), run it:
 # RUN npm run build
 # If not, noop (keeps source as-is)
