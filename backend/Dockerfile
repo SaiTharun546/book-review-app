@@ -2,7 +2,7 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 # Copy package files first to use Docker cache
-COPY backend/package*.json ./
+COPY package*.json ./
 # Install all deps (dev + prod) needed for build
 RUN npm ci
 # Copy source
@@ -17,7 +17,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # Install only production dependencies (fresh install for smallest image)
-COPY backend/package*.json ./
+COPY package*.json ./
 RUN npm ci --production
 
 # Copy runtime artifacts from builder
