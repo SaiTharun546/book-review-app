@@ -2,13 +2,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link"; // Import Next.js Link
+import { api } from '../services/api'; 
 
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/books`) // Ensure correct API call
+   api.get("/api/books")
       .then(response => {
         setBooks(response.data);
         setLoading(false);
