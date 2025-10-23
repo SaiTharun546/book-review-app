@@ -9,16 +9,10 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-   api.get("/api/books")
-      .then(response => {
-        setBooks(response.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error("Error fetching books:", error);
-        setLoading(false);
-      });
-  }, []);
+  api.get("/api/books")
+    .then(res => { setBooks(res.data); setLoading(false); })
+    .catch(err => { console.error("Error fetching books:", err); setLoading(false); });
+}, []);
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
